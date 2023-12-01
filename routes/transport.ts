@@ -24,4 +24,18 @@ router.post('/ajout', (req: Request, res: Response) => {
         );
 });
 
+router.get('/all', (req: Request, res: Response) =>{
+    transportModel.find({})
+    .then(
+        (TransportModelType)=>{
+            res.status(200).send(TransportModelType);
+        }
+    )
+    .catch(
+        (err: Error) =>{
+            res.status(400).send(err);
+        }
+    )
+})
+
 export = router;
