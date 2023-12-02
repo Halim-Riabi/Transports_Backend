@@ -53,7 +53,37 @@ router.get('/getbyid/:id', (req: Request, res: Response) =>{
     )
 });
 
+router.delete('/delete/:id', (req: Request, res: Response) =>{
+    let id = req.params.id;
+    transportModel.findByIdAndDelete({_id : id})
+    .then(
+        (TransportModelType)=>{
+            res.status(200).send(TransportModelType);
+        }
+    )
+    .catch(
+        (err: Error) =>{
+            res.status(400).send(err);
+        }
+    )
+})
 
+router.put('/update/:id', (req: Request, res: Response) =>{
+    let id = req.params.id;
+    let data = req.body;
+
+    transportModel.findByIdAndUpdate({_id:id}, data)
+    .then(
+        (TransportModelType)=>{
+            res.status(200).send(TransportModelType);
+        }
+    )
+    .catch(
+        (err)=>{
+            res.status(400).send(err);
+        }
+    )
+})
 
 export = router;
 
